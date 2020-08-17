@@ -26,8 +26,7 @@ def single_byte_xor(byte_array, k):
     return bytearray(tmp)
 
 
-def decode(message):
-    b = bytearray.fromhex(message)
+def decode(b):
     original_text, encryption_key, min_fq, fq = None, None, None, None
     try:
         for i in range(256):
@@ -36,14 +35,15 @@ def decode(message):
             if min_fq is None or fq < min_fq:
                 encryption_key, original_text, min_fq = i, text, fq
         return original_text, encryption_key
-    except Exception as e:
+    except:
         return None
 
 
 def main():
     message = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
     print("Message: %s" % message)
-    ans = decode(message)
+    b = bytearray.fromhex(message)
+    ans = decode(b)
     if ans is not None:
 
         print("Decrypted Text: %s" % ans[0].decode('ascii'))
