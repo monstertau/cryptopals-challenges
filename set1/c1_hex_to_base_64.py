@@ -6,7 +6,7 @@ base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
 def encode(hex_str, base64_str):
     L = []
     b = bytearray.fromhex(hex_str)
-    print("Secret Word: %s\n" % b.decode('ascii'))
+    # print("Secret Word: %s\n" % b.decode('ascii'))
     pad_count = len(b) % 3
     for i in range(0, len(b), 3):
         # shift the first of 3 digits to first 8 bits of 24 bits number
@@ -30,13 +30,14 @@ def encode(hex_str, base64_str):
             L.append("=")
             pad_count += 1
     encoded = "".join(L)
+    print(encoded)
     if encoded == base64_str:
         return True
     return False
 
 
 def main():
-    hex_str = '306e6c79206e3030622063346e277420336e63306433207468317320737472316e392e'
+    hex_str = '72bca9b68fc16ac7beeb8f849dca1d8a783e8acf9679bf9269f7bf'
     base64_str = 'MG5seSBuMDBiIGM0bid0IDNuYzBkMyB0aDFzIHN0cjFuOS4='
     print("hex string:\t%s\n\nbase64 string:\t%s\n" % (hex_str, base64_str))
     if encode(hex_str, base64_str):
